@@ -13,8 +13,8 @@ Fichier de test : small.mp4
 
 Fichier de sortie : output.avi
 
-Interval choisie : de 1:20 à 1:30
+Début à 2 sec et durée de 1 sec
 
-`ffmpeg -i small.mp4 -read_intervals 1:20%1:30 output.avi`
+`ffmpeg -i small.mp4 -ss 2 -t 1 output.avi`
 
 
