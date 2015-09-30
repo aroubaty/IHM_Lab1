@@ -56,7 +56,7 @@
      <string>Output directory</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="txtInputFile">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -66,7 +66,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="txtOutputFile">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -76,7 +76,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="btnChooseInputFile">
     <property name="geometry">
      <rect>
       <x>460</x>
@@ -94,7 +94,7 @@
      <string>...</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="btnChooseOutputFile">
     <property name="geometry">
      <rect>
       <x>460</x>
@@ -112,7 +112,7 @@
      <string>...</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_3">
+   <widget class="QLineEdit" name="txtNameOutputFile">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -143,7 +143,7 @@
      <string>File name</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QTextEdit" name="txtInputFileProperties">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -177,7 +177,7 @@
      <string>Input file properties</string>
     </property>
    </widget>
-   <widget class="QTimeEdit" name="timeEdit">
+   <widget class="QTimeEdit" name="timeEditStart">
     <property name="geometry">
      <rect>
       <x>90</x>
@@ -190,10 +190,10 @@
      <string>HH:mm:ss</string>
     </property>
    </widget>
-   <widget class="QTimeEdit" name="timeEdit_2">
+   <widget class="QTimeEdit" name="timeEditEnd">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>280</x>
       <y>83</y>
       <width>71</width>
       <height>22</height>
@@ -227,7 +227,7 @@
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>230</x>
       <y>80</y>
       <width>71</width>
       <height>31</height>
@@ -245,7 +245,7 @@
      <string>End at</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_4">
+   <widget class="QLineEdit" name="txtCommandInvoked">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -279,7 +279,7 @@
      <string>System command which will be invoked</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="btnStart">
     <property name="geometry">
      <rect>
       <x>850</x>
