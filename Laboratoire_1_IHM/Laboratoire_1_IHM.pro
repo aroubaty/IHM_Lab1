@@ -12,8 +12,10 @@ TARGET = Laboratoire_1_IHM
 TEMPLATE = app
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    commandbuilder.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    commandbuilder.h
 
 FORMS    += mainwindow.ui
