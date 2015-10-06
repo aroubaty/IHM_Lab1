@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QGridLayout>
+#include <QDebug>
 
 namespace Ui {
 class MainWindow;
@@ -16,9 +17,19 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void on_btnChooseInputFile_clicked();
+
+    void on_btnChooseOutputFile_clicked();
+
+    void on_timeEditStart_timeChanged(const QTime &time);
+
+    void on_timeEditEnd_timeChanged(const QTime &time);
+
+    void on_txtNameOutputFile_textChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
-
     QGridLayout* gridInputOutput;
 };
 

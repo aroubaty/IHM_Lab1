@@ -152,7 +152,7 @@
       <x>570</x>
       <y>40</y>
       <width>441</width>
-      <height>161</height>
+      <height>191</height>
      </rect>
     </property>
    </widget>
@@ -758,4 +758,7 @@
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
+ <slots>
+  <slot>chooseInputFileSlot()</slot>
+ </slots>
 </ui>
