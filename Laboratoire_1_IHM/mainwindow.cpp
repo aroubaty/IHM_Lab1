@@ -5,6 +5,7 @@
 
 #include <QFileDialog>
 #include <QProcess>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,16 +23,26 @@ MainWindow::~MainWindow()
 void MainWindow::on_btnChooseInputFile_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this);
-    ui->txtInputFile->setText(fileName);
 
     // Display file properties
-    QString command = "explorer.exe"; // TODO:Remplacer par CommandBuilder qui marche pas
+    QString command = CommandBuilder::getMeta(fileName);
 
     QProcess process;
     process.start(command);
-    process.waitForFinished(-1);
 
-    QString result = process.readAllStandardOutput();
+    QString result;
+
+    if(process.waitForFinished(-1)) // True si le processus a bien démarré avant 30000 ms
+    {
+        result = process.readAllStandardOutput();
+
+        // TODO: Ici, il faut récupérer la durée de la vidéo et afficher son temps final dans le champ end_time...
+
+    }
+    else
+        result = "Missing ffprobe process on your computer, impossible to load properties of file";
+
+    ui->txtInputFile->setText(fileName);
     ui->txtInputFileProperties->setText(result);
 }
 
