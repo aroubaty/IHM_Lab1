@@ -31,6 +31,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QGridLayout* gridInputOutput;
+    void updateCommmand();
 };
 
 #endif // MAINWINDOW_H
