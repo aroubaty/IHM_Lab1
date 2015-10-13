@@ -44,6 +44,8 @@ void MainWindow::on_btnChooseInputFile_clicked()
 
     ui->txtInputFile->setText(fileName);
     ui->txtInputFileProperties->setText(result);
+
+    updateCommande();
 }
 
 void MainWindow::on_btnChooseOutputFile_clicked()
@@ -54,14 +56,17 @@ void MainWindow::on_btnChooseOutputFile_clicked()
 
 void MainWindow::on_timeEditStart_timeChanged(const QTime &time)
 {
+    updateCommmand();
 }
 
 void MainWindow::on_timeEditEnd_timeChanged(const QTime &time)
 {
+    updateCommande();
 }
 
 void MainWindow::on_txtNameOutputFile_textChanged(const QString &arg1)
 {
+    updateCommande();
 }
 
 void MainWindow::updateCommmand() {
