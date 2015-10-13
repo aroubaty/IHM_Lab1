@@ -32,9 +32,11 @@ void MainWindow::on_btnChooseInputFile_clicked()
 
     QString result;
 
-    if(process.waitForFinished(-1)) // True si le processus a bien démarré avant 30000 ms
+    if(process.waitForFinished(30000)) // True si le processus a bien démarré avant 30000 ms
     {
-        result = process.readAllStandardOutput();
+
+        qDebug("retour -> " + process.readAllStandardOutput());
+        result = "lalal " + process.readAllStandardOutput();
 
         // TODO: Ici, il faut récupérer la durée de la vidéo et afficher son temps final dans le champ end_time...
 
