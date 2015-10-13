@@ -18,3 +18,4 @@ Début à 2 sec et durée de 1 sec
 `ffmpeg -i small.mp4 -ss 2 -t 1 output.avi`
 
 
+### Rendu : 30 Octobre
