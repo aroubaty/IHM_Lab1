@@ -28,15 +28,16 @@ void MainWindow::on_btnChooseInputFile_clicked()
     QString command = CommandBuilder::getMeta(fileName);
 
     QProcess process;
-    process.start(command);
+    process.start(command); /* METTRE LES ARGUMENTS COMME DEUXIEME PARAMETRE */
 
     QString result;
 
-    if(process.waitForFinished(-1)) // True si le processus a bien démarré avant 30000 ms
+    if(process.waitForFinished(3000)) // True si le processus a bien démarré avant 3 secondes
     {
         result = process.readAllStandardOutput();
 
         // TODO: Ici, il faut récupérer la durée de la vidéo et afficher son temps final dans le champ end_time...
+        // Vérifier que le fichier est une vidéo, grâce aux propriétés du fichier et donner un feedback !!!
 
     }
     else

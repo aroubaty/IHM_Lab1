@@ -9,5 +9,5 @@ QString CommandBuilder::getCommandLine(QString input, QString output, int start,
 }
 
 QString CommandBuilder::getMeta(QString file){
-    return "ffprobe " + file;
+    return "ffprobe -v quiet -print_format json -show_format -show_streams -byte_binary_prefix " + file;
 }
