@@ -28,17 +28,19 @@ void MainWindow::on_btnChooseInputFile_clicked()
     QString command = CommandBuilder::getMeta(fileName);
 
     QProcess process;
-    process.start(command);
+    process.start(command); /* METTRE LES ARGUMENTS COMME DEUXIEME PARAMETRE */
 
     QString result;
 
-    if(process.waitForFinished(30000)) // True si le processus a bien démarré avant 30000 ms
+
+    if(process.waitForFinished(3000)) // True si le processus a bien démarré avant 3 secondes
     {
 
         qDebug("retour -> " + process.readAllStandardOutput());
         result = "lalal " + process.readAllStandardOutput();
 
         // TODO: Ici, il faut récupérer la durée de la vidéo et afficher son temps final dans le champ end_time...
+        // Vérifier que le fichier est une vidéo, grâce aux propriétés du fichier et donner un feedback !!!
 
     }
     else
@@ -46,6 +48,8 @@ void MainWindow::on_btnChooseInputFile_clicked()
 
     ui->txtInputFile->setText(fileName);
     ui->txtInputFileProperties->setText(result);
+
+    updateCommande();
 }
 
 void MainWindow::on_btnChooseOutputFile_clicked()
@@ -56,14 +60,17 @@ void MainWindow::on_btnChooseOutputFile_clicked()
 
 void MainWindow::on_timeEditStart_timeChanged(const QTime &time)
 {
+    updateCommmand();
 }
 
 void MainWindow::on_timeEditEnd_timeChanged(const QTime &time)
 {
+    updateCommande();
 }
 
 void MainWindow::on_txtNameOutputFile_textChanged(const QString &arg1)
 {
+    updateCommande();
 }
 
 void MainWindow::updateCommmand() {
