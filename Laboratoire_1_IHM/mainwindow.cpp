@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QStringList>
 #include <QJsonDocument>
+#include <QJsonObject>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
