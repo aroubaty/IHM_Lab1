@@ -10,7 +10,6 @@ public:
     explicit CommandBuilder(QObject *parent = 0);
 
     static QString getCommandLine(QString input, QString output, int start, int time);
-    static QString getMeta(QString file);
 
 signals:
 

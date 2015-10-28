@@ -6,6 +6,8 @@
 #include <QFileDialog>
 #include <QProcess>
 #include <QDebug>
+#include <QStringList>
+#include <QJsonDocument>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -20,33 +22,55 @@ MainWindow::~MainWindow()
     delete gridInputOutput;
 }
 
+void MainWindow::updateCommand() {
+    QString command = "Une commande"; // TODO:Remplacer par CommandBuilder qui marche pas
+    ui->txtCommandInvoked->setText(command);
+}
+
 void MainWindow::on_btnChooseInputFile_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this);
 
     // Display file properties
-    QString command = CommandBuilder::getMeta(fileName);
+    QString command = "ffprobe";
 
     QProcess process;
-    process.start(command); /* METTRE LES ARGUMENTS COMME DEUXIEME PARAMETRE */
+
+    // Ces paramètres permettent de récupérer les propriétés du fichier au format JSON, plus simple à parser
+    QStringList args;
+    args
+            << "-v"
+            << "quiet"
+            << "-print_format"
+            << "json"
+            << "-show_format"
+            << "-show_streams"
+            << "-byte_binary_prefix"
+            << fileName;
+
+    process.start(command, args);
 
     QString result;
 
     if(process.waitForFinished(3000)) // True si le processus a bien démarré avant 3 secondes
     {
         result = process.readAllStandardOutput();
+        qDebug() << result;
 
-        // TODO: Ici, il faut récupérer la durée de la vidéo et afficher son temps final dans le champ end_time...
-        // Vérifier que le fichier est une vidéo, grâce aux propriétés du fichier et donner un feedback !!!
+        // Récupération des propriétés du fichier
+        QJsonDocument document = QJsonDocument::fromJson(result.toUtf8());
+        QJsonObject rootObject = document.object();
+
 
     }
-    else
-        result = "Missing ffprobe process on your computer, impossible to load properties of file";
+    else {
+        result = "Missing ffprobe process on your computer, impossible to load properties of file, If you have ffprobe binaries, put the directory in your PATH environnement.";
+    }
 
     ui->txtInputFile->setText(fileName);
     ui->txtInputFileProperties->setText(result);
 
-    updateCommande();
+    updateCommand();
 }
 
 void MainWindow::on_btnChooseOutputFile_clicked()
@@ -57,20 +81,15 @@ void MainWindow::on_btnChooseOutputFile_clicked()
 
 void MainWindow::on_timeEditStart_timeChanged(const QTime &time)
 {
-    updateCommmand();
+    updateCommand();
 }
 
 void MainWindow::on_timeEditEnd_timeChanged(const QTime &time)
 {
-    updateCommande();
+    updateCommand();
 }
 
 void MainWindow::on_txtNameOutputFile_textChanged(const QString &arg1)
 {
-    updateCommande();
-}
-
-void MainWindow::updateCommmand() {
-    QString command = "Une commande"; // TODO:Remplacer par CommandBuilder qui marche pas
-    ui->txtCommandInvoked->setText(command);
+    updateCommand();
 }
