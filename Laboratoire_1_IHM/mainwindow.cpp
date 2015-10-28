@@ -52,10 +52,10 @@ void MainWindow::on_btnChooseInputFile_clicked()
 
     QString result;
 
+
     if(process.waitForFinished(3000)) // True si le processus a bien démarré avant 3 secondes
     {
         result = process.readAllStandardOutput();
-        qDebug() << result;
 
         // Récupération des propriétés du fichier
         QJsonDocument document = QJsonDocument::fromJson(result.toUtf8());
