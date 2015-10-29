@@ -28,6 +28,8 @@ private slots:
 
     void on_txtNameOutputFile_textChanged(const QString &arg1);
 
+    void on_btnStart_clicked();
+
 private:
     Ui::MainWindow *ui;
     QGridLayout* gridInputOutput;

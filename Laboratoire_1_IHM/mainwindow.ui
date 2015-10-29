@@ -280,6 +280,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="btnStart">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>850</x>
@@ -715,6 +718,19 @@
     </property>
     <property name="text">
      <string>Start !</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtFeedBack">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>120</y>
+      <width>531</width>
+      <height>20</height>
+     </rect>
     </property>
    </widget>
   </widget>
