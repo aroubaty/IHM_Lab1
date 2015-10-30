@@ -125,13 +125,13 @@ void MainWindow::on_btnStart_clicked()
 {
     QStringList args;
 
-    args << "-i" << "/" + ui->txtInputFile->text().replace(":", "")
+    args << "-i" << ui->txtInputFile->text()
          << "-ss" << QString::number((int) ui->timeEditStart->time().msecsSinceStartOfDay() / 1000)
          << "-t" << QString::number((int) ui->timeEditEnd->time().msecsSinceStartOfDay() / 1000)
-         << "/" + ui->txtOutputFile->text().replace(":","") + "/" + ui->txtNameOutputFile->text();
+         << ui->txtOutputFile->text() + "/" + ui->txtNameOutputFile->text();
 
     QProcess p;
-    p.startDetached("ffmpeg", args);
+    p.start("ffmpeg", args);
 
     /* On attend que la conversion soit finie */
     p.waitForFinished(-1);
