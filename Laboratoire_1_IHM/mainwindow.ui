@@ -145,7 +145,7 @@
    </widget>
    <widget class="QTextEdit" name="txtInputFileProperties">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
@@ -154,6 +154,9 @@
       <width>441</width>
       <height>191</height>
      </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
@@ -726,9 +729,28 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>120</y>
-      <width>531</width>
+      <x>260</x>
+      <y>20</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtTimeOutputVideo">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>84</y>
+      <width>181</width>
       <height>20</height>
      </rect>
     </property>

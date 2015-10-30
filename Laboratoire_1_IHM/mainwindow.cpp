@@ -82,14 +82,12 @@ void MainWindow::on_btnChooseInputFile_clicked()
         double duration = firstStream["duration"].toString().toDouble();
 
         // Affichage de la durée et mise à jour du champ time end
+        ui->timeEditStart->setTime(QTime::fromMSecsSinceStartOfDay(0));
         ui->timeEditEnd->setTime(QTime::fromMSecsSinceStartOfDay(duration * 1000));
 
         ui->txtInputFile->setText(fileName);
 
-
-        ui->txtInputFileProperties->setText("Propriétés du fichier à mettre");
-
-
+        ui->txtInputFileProperties->setText(result);
         ui->txtFeedBack->setText("Valid input file");
 
     }
@@ -100,6 +98,15 @@ void MainWindow::on_btnChooseInputFile_clicked()
     updateCommand();
 }
 
+void MainWindow::showTimeOverlapping() {
+
+    QTime start = ui->timeEditStart->time();
+    QTime end = ui->timeEditEnd->time();
+
+    int overlapping = end.msecsSinceStartOfDay() - start.msecsSinceStartOfDay();
+    ui->txtTimeOutputVideo->setText("Duration of output video : " + QTime::fromMSecsSinceStartOfDay(overlapping).toString());
+}
+
 void MainWindow::on_btnChooseOutputFile_clicked()
 {
     QString directoryName = QFileDialog::getExistingDirectory(this);
@@ -108,11 +115,13 @@ void MainWindow::on_btnChooseOutputFile_clicked()
 
 void MainWindow::on_timeEditStart_timeChanged(const QTime &time)
 {
+    showTimeOverlapping();
     updateCommand();
 }
 
 void MainWindow::on_timeEditEnd_timeChanged(const QTime &time)
 {
+    showTimeOverlapping();
     updateCommand();
 }
 
@@ -123,6 +132,33 @@ void MainWindow::on_txtNameOutputFile_textChanged(const QString &arg1)
 
 void MainWindow::on_btnStart_clicked()
 {
+    QMessageBox msg;
+
+    if(ui->txtInputFile->text().isEmpty() || ui->txtInputFile->text().isNull()) {
+        msg.setText("Please specifiy an input file");
+        msg.exec();
+        return;
+    }
+
+    if(ui->txtOutputFile->text().isEmpty() || ui->txtOutputFile->text().isNull()) {
+        msg.setText("Please specifiy an output directory");
+        msg.exec();
+        return;
+    }
+
+    if(ui->txtNameOutputFile->text().isEmpty() || ui->txtNameOutputFile->text().isNull()) {
+        msg.setText("Please specifiy a name for the output file (exemple : myVideo.MP4)");
+        msg.exec();
+        return;
+    }
+
+    if(ui->timeEditEnd->time().msecsSinceStartOfDay() - ui->timeEditStart->time().msecsSinceStartOfDay() < 0)
+    {
+        msg.setText("End Time smaller than start time, impossible to convert video. Please check.");
+        msg.exec();
+        return;
+    }
+
     QStringList args;
 
     args << "-i" << ui->txtInputFile->text()
@@ -130,9 +166,10 @@ void MainWindow::on_btnStart_clicked()
          << "-t" << QString::number((int) ui->timeEditEnd->time().msecsSinceStartOfDay() / 1000)
          << ui->txtOutputFile->text() + "/" + ui->txtNameOutputFile->text();
 
-    QProcess p;
-    p.start("ffmpeg", args);
+    msg.setText("The conversion will start in a terminal, please not close terminal frame. Click OK to start.");
+    msg.exec();
 
-    /* On attend que la conversion soit finie */
-    p.waitForFinished(-1);
+    QProcess p;
+    p.startDetached("ffmpeg", args);
+
 }

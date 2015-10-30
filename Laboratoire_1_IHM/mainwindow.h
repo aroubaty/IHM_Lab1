@@ -34,6 +34,7 @@ private:
     Ui::MainWindow *ui;
     QGridLayout* gridInputOutput;
     void updateCommand();
+    void showTimeOverlapping();
 };
 
 #endif // MAINWINDOW_H
