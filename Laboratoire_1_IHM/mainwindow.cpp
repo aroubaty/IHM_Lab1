@@ -152,6 +152,15 @@ void MainWindow::on_btnStart_clicked()
         return;
     }
 
+    // Check if the output file exists
+    if(QFile(ui->txtOutputFile->text() + "/" + ui->txtNameOutputFile->text()).exists())
+    {
+        msg.setText("Sorry, the output file already exists, please change his name or his directory");
+        msg.exec();
+        return;
+    }
+
+
     if(ui->timeEditEnd->time().msecsSinceStartOfDay() - ui->timeEditStart->time().msecsSinceStartOfDay() < 0)
     {
         msg.setText("End Time smaller than start time, impossible to convert video. Please check.");
